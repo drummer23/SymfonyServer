@@ -5,14 +5,17 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Person;
+use Psr\Log\LoggerInterface;
 
 class PersonController extends AbstractController
 {
     /**
      * @Route("/person", name="person")
      */
-    public function index()
+    public function index(LoggerInterface $logger)
     {
+        $logger->info('fetching objects...');
+
         $persons = $this->getDoctrine()
         ->getRepository(Person::class)
         ->findAll();
