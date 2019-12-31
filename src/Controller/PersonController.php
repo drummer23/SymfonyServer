@@ -43,12 +43,6 @@ class PersonController extends AbstractController
      */
      public function show(Person $person)
      {
-         if (!$person) {
-             throw $this->createNotFoundException(
-                 'No person found for id '
-             );
-         }
-
          return $this->render('person/index.html.twig', [
              'controller_name' => 'PersonController',
              'persons' => $person->getName()
