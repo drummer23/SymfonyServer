@@ -23,7 +23,7 @@ class HelloController
     {
         $someVar = "hello";
 
-        $someVar .= " xdebug";
+        $someVar .= " world";
 
         return new Response($someVar);
     }

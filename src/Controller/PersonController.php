@@ -28,12 +28,8 @@ class PersonController extends AbstractController
 
         $names = array();
 
-
-        /* @var $person Person */
         foreach ($persons as $person) {
-            $names[] = $person->getName();
-
-            // code...
+            $names[] = $person->getId() . " " . $person->getName();
         }
 
         return $this->render('person/index.html.twig', [
@@ -41,4 +37,21 @@ class PersonController extends AbstractController
             'persons' => implode('-', $names)
         ]);
     }
+
+    /**
+     * @Route("/person/{id}", name="person_show")
+     */
+     public function show(Person $person)
+     {
+         if (!$person) {
+             throw $this->createNotFoundException(
+                 'No person found for id '
+             );
+         }
+
+         return $this->render('person/index.html.twig', [
+             'controller_name' => 'PersonController',
+             'persons' => $person->getName()
+         ]);
+     }
 }
